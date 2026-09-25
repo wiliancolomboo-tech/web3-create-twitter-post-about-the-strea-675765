@@ -1,0 +1,16 @@
+🔥 [ON-CHAIN STREAM BURN EVENT] 🔥
+
+125,000 $STREAM has been permanently removed from circulation forever.
+
+Transaction hash:
+🔗 https://solscan.io/tx/4hB8xQ9KzC...mY5z
+
+Key On-Chain Metrics:
+📉 Batch Destroyed: 125,000 STREAM ($18,750)
+🔥 Cumulative Burned: 2,450,000 STREAM (2.45% of total supply)
+🔒 Verifiable Anchor PDA: `burn_vault` (Zero human custody)
+⚡ Executed via SPL-Token Burn CPI
+
+Proof-of-Deflation is verifiable in real time on @solana. 
+
+Thread on the mechanics 👇🧵

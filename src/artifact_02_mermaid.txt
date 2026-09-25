@@ -1,0 +1,38 @@
+flowchart TD
+    subgraph Client & Protocol Keepers
+        KP[Autonomous Crank / Keeper Bot]
+        US[Streaming Yield / Fee Settler]
+    end
+
+    subgraph Solana Runtime - Stream Burn Engine
+        direction TB
+        VA[Burn Config PDA\nb"burn_config", mint]
+        VT[Vault Token Account\nb"burn_vault", mint]
+        TK[SPL Token Program / Token-2022]
+        MT[STREAM Mint Account]
+        
+        US -->|1. deposit_to_burn(amount)| VT
+        KP -->|2. execute_burn(min_threshold)| VA
+        VA -.->|PDA Seeds Auth| VT
+        VA -->|3. CPI: spl_token::burn| TK
+        TK -->|4. Destroy Tokens & Decrement Supply| MT
+        VA -->|5. Emit StreamBurnedEvent| EV[Program Log Emit]
+    end
+
+    subgraph Off-Chain Social Verification Engine
+        direction TB
+        WS[Solana RPC Geyser / WebSocket]
+        EV -.->|6. logsSubscribe Filter| WS
+        WS -->|7. Ingest Event Payload| ENG[Verification & Formatting Engine]
+        ENG -->|8. Fetch getMint & Compute Supply %| RPC[Solana JSON-RPC]
+        ENG -->|9. Sign Twitter/X API Payload| XAUTH[OAuth 1.0a / 2.0 Auth]
+        XAUTH -->|10. POST /2/tweets| XAPI[X / Twitter API]
+    end
+
+    classDef anchor fill:#14F195,stroke:#000,stroke-width:1.5px,color:#000;
+    classDef offchain fill:#9945FF,stroke:#000,stroke-width:1.5px,color:#fff;
+    classDef solana fill:#1e1e1e,stroke:#14F195,stroke-width:1px,color:#fff;
+    
+    class VA,VT,EV anchor;
+    class WS,ENG,XAUTH,XAPI offchain;
+    class TK,MT,RPC solana;

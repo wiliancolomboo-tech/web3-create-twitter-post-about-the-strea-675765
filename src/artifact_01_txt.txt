@@ -1,0 +1,17 @@
+┌───────────────────────────────┐
+       │   Fee Stream / Protocol Yield │
+       └──────────────┬────────────────┘
+                      ▼
+       ┌───────────────────────────────┐
+       │  Anchor Burn Engine (Solana)  │
+       │  - SPL Token Burn CPI         │
+       │  - Cumulative Metrics Counter │
+       │  - Emits StreamBurnedEvent    │
+       └──────────────┬────────────────┘
+                      ▼ (RPC WebSocket Log Filter)
+       ┌───────────────────────────────┐
+       │   Automated X/Twitter Oracle  │
+       │   - Verifies tx on-chain      │
+       │   - Computes supply metrics   │
+       │   - Dispatches Verified Post  │
+       └───────────────────────────────┘
