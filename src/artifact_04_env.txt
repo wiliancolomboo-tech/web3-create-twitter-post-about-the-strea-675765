@@ -1,0 +1,14 @@
+# Solana RPC
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+STREAM_MINT_ADDRESS=STRM72h4m9n2bX9rU4T6Bv5sN1vB8xK9Z3pL8wQ2j6K
+POLL_INTERVAL_MS=10000
+
+# Social Auth (Twitter API v2 OAuth 1.0a)
+TWITTER_API_KEY=your_consumer_key
+TWITTER_API_SECRET=your_consumer_secret
+TWITTER_ACCESS_TOKEN=your_oauth_token
+TWITTER_ACCESS_SECRET=your_oauth_token_secret
+
+# Alerting
+DISCORD_SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DB_PATH=./data/burn_history.db

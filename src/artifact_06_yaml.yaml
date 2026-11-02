@@ -1,0 +1,25 @@
+# File: docker-compose.yml
+version: "3.8"
+
+services:
+  streamburn-sentinel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: streamburn-sentinel-prod
+    restart: unless-stopped
+    environment:
+      - STREAM_MINT_ADDRESS=${STREAM_MINT_ADDRESS}
+      - SOLANA_RPC_HTTP_URL=${SOLANA_RPC_HTTP_URL}
+      - SOLANA_RPC_WS_URL=${SOLANA_RPC_WS_URL}
+      - TWITTER_APP_KEY=${TWITTER_APP_KEY}
+      - TWITTER_APP_SECRET=${TWITTER_APP_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - MIN_BURN_THRESHOLD=100
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

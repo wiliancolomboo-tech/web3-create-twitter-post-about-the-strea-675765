@@ -1,0 +1,43 @@
+flowchart TD
+    subgraph Protocol Revenue Generation
+        U1[Vesting Protocol Users] -->|Pay Fees SOL/USDC| VPool[Protocol Fee Vault]
+        U2[Streaming Payroll Users] -->|Pay Fees SOL/USDC| VPool
+    end
+
+    subgraph DEX Liquidity & Buyback
+        VPool -->|Swap via Jupiter/Orca CPI| DEX[DEX Liquidity Pool]
+        DEX -->|Purchased $STREAM| BurnVault[Burn Vault ATA\nOwner: Burner PDA]
+    end
+
+    subgraph On-Chain Solana Anchor Program
+        Keeper[Permissionless Keeper / Crank] -->|invoke burn_stream| Prog[Stream Burner Program]
+        
+        subgraph Program Account State Validation
+            Prog -->|Check PDA seeds| PDAAuth[PDA: burn_authority]
+            Prog -->|Validate Tracker| TrackerState[PDA: BurnTracker Account\nTotal Burned, Count, Mint]
+        end
+
+        subgraph SPL Token Execution
+            Prog -->|CPI: spl_token::burn| TokenProg[SPL Token Program]
+            TokenProg -->|Decrease Supply| MintAccount[Mint: $STREAM\nsupply -= amount]
+            TokenProg -->|Debit Balance| BurnVault
+        end
+
+        Prog -->|Emit Anchor Event| Event[StreamBurnEvent\namount, slot, timestamp, cumulative]
+    end
+
+    subgraph Off-Chain Autonomous Broadcast Layer
+        Event -->|WebSocket Log Subscription| RPC[Solana RPC / Helius Webhook]
+        RPC -->|Parse Transaction Signature| BotEngine[Autonomous Bot Service]
+        BotEngine -->|Query Enriched Tx & Solscan| Verify[Verification Engine]
+        Verify -->|Publish Verified Payload| TwitterAPI[X / Twitter API v2]
+        TwitterAPI -->|Post Thread + Proof| XSocial[Live X Tweet Feed]
+    end
+
+    classDef anchor fill:#1b263b,stroke:#00b4d8,stroke-width:2px,color:#fff;
+    classDef spl fill:#2b2d42,stroke:#8d99ae,stroke-width:2px,color:#fff;
+    classDef social fill:#3a0ca3,stroke:#4cc9f0,stroke-width:2px,color:#fff;
+
+    class Prog,PDAAuth,TrackerState,Event anchor;
+    class TokenProg,MintAccount,BurnVault spl;
+    class BotEngine,Verify,TwitterAPI,XSocial social;

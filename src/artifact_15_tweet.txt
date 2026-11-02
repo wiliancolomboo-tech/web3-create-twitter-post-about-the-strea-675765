@@ -1,0 +1,5 @@
+2/ How does the $STREAM burn work?
+
+Streamflow protocol fees accrued from token locks, vesting contracts, and streaming payroll directly fund recurring on-chain burns.
+
+Every transaction executes via the SPL Token Program, verified deterministically by our Anchor-indexed registry. No trust needed—just math.

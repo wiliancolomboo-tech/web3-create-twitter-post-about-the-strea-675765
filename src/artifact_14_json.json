@@ -1,0 +1,31 @@
+{
+  "name": "stream-burn-sentinel",
+  "version": "1.0.0",
+  "description": "Autonomous On-Chain SPL Token Burn Monitor & Social Announcement Engine for Streamflow",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "cli": "ts-node src/cli.ts",
+    "test": "mocha -r ts-node/register tests/**/*.test.ts"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.6",
+    "@solana/web3.js": "^1.91.8",
+    "axios": "^1.6.8",
+    "commander": "^12.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.14",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.12.7",
+    "@types/sinon": "^17.0.3",
+    "chai": "^4.4.1",
+    "mocha": "^10.4.0",
+    "sinon": "^17.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

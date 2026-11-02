@@ -1,0 +1,47 @@
+import { Connection } from "@solana/web3.js";
+import { verifyStreamBurn } from "./solana.js";
+import { Store } from "./store.js";
+import { createXPost } from "./x.js";
+
+export async function publishBurn(signature: string) {
+  const rpcUrl = process.env.SOLANA_RPC_URL;
+  const mint = process.env.STREAM_MINT;
+
+  if (!rpcUrl || !mint) {
+    throw new Error("SOLANA_RPC_URL and STREAM_MINT are required");
+  }
+
+  const store = new Store();
+  const existing = store.get(signature);
+
+  if (existing) {
+    return {
+      status: "already_posted",
+      xPostId: existing.x_post_id,
+      signature
+    };
+  }
+
+  const connection = new Connection(rpcUrl, "confirmed");
+  const proof = await verifyStreamBurn(connection, signature, mint);
+
+  const hashtag = process.env.X_HASHTAG ?? "#STREAM";
+  const text =
+    `🔥 ${proof.humanAmount} STREAM burned.\n\n` +
+    `Verified on Solana:\n${proof.explorerUrl}\n\n` +
+    `${hashtag}`;
+
+  if (text.length > 280) {
+    throw new Error("Generated X post exceeds 280 characters");
+  }
+
+  const postId = await createXPost(text);
+  store.save(proof, postId);
+
+  return {
+    status: "posted",
+    postId,
+    xUrl: `https://x.com/i/web/status/${postId}`,
+    proof
+  };
+}

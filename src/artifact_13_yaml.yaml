@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  streampulse-oracle:
+    build: .
+    container_name: streampulse_oracle
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - SOLANA_WS_URL=${SOLANA_WS_URL:-wss://api.mainnet-beta.solana.com}
+      - STREAM_MINT_ADDRESS=${STREAM_MINT_ADDRESS:-STREAMribs2FmKkSvdjA7n7eB846e9o3bK4z6k7V7m2}
+      - STREAM_DECIMALS=9
+      - TWITTER_API_KEY=${TWITTER_API_KEY}
+      - TWITTER_API_SECRET=${TWITTER_API_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

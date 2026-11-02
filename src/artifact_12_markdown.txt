@@ -1,0 +1,8 @@
+1/ Real protocol revenue leads to real supply destruction. 
+
+Another massive $STREAM burn just settled on @Solana at slot #289,411,048.
+
+Total tokens destroyed: 250,000 $STREAM (~$21,500 USD).
+Proof on @Solscan: https://solscan.io/tx/4yZpA8vR...
+
+Here is the breakdown of why this matters for the @streamflow_fi ecosystem 👇

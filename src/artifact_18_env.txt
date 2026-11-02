@@ -1,0 +1,16 @@
+# Solana Network Credentials
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+STREAM_MINT_ADDRESS=STREAM59LgS4g2U1ijc3Kk39n46x6Wv1hV4tG4oRburn
+TOKEN_DECIMALS=9
+
+# Twitter API v2 Credentials (Elevated/Basic access required)
+TWITTER_API_KEY=your_api_key_here
+TWITTER_API_SECRET=your_api_secret_here
+TWITTER_ACCESS_TOKEN=your_access_token_here
+TWITTER_ACCESS_SECRET=your_access_token_secret_here
+
+# Telemetry & Notifications
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DRY_RUN=false
+PORT=8080

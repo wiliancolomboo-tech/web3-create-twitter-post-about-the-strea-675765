@@ -1,0 +1,19 @@
+# Solana Infrastructure
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+STREAM_MINT_ADDRESS=STREAM3d2p...YOUR_MINT_ADDRESS
+PROGRAM_ID=StrMBurnCoord111111111111111111111111111111
+STREAM_DECIMALS=9
+
+# Pyth Oracle
+PYTH_FEED_ADDRESS=HovQMDrbAgAYPCmHVSrezcSmkMtXSSUsLDFANExrZh2J
+
+# Twitter / X API v2 Credentials
+TWITTER_API_KEY=xXxxXxXxxXxXxXxX
+TWITTER_API_SECRET=yYyyYyyYyyYyyYyyYyyYyyY
+TWITTER_ACCESS_TOKEN=123456789-zZzzZzzZzzZzzZzzZ
+TWITTER_ACCESS_SECRET=wWwwWwwWwwWwwWwwW
+
+# Enterprise Notifications (Optional)
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder

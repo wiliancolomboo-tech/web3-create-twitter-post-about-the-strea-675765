@@ -1,0 +1,7 @@
+2/ How does the $STREAM burn work?
+
+Every transaction and protocol fee generated across the ecosystem fuels an automated buyback-and-burn engine.
+
+Tokens are sent directly to the SPL incinerator address, permanently lowering supply and increasing scarcity for all holders.
+
+No promises. Just verified, on-chain execution. ⚡

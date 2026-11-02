@@ -1,0 +1,7 @@
+3/ Deflation is not an event — it’s an immutable protocol constant.
+
+As velocity and protocol volume on Solana surge, $STREAM burns will accelerate programmatically. 
+
+Track real-time burn metrics & supply deltas live on our dashboard: app.streamflow.finance/analytics
+
+Building the future of programmable money on @Solana. 💧⚡️

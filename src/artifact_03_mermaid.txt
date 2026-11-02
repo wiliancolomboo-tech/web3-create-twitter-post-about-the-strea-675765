@@ -1,0 +1,40 @@
+flowchart TD
+    subgraph Client_and_Keepers["Keeper & Trigger Ecosystem"]
+        direction TB
+        CRON[Autonomous Crank / Keeper] -->|Signed Transaction: execute_burn| SOL_RPC[Solana RPC Node - Helius/Triton]
+        USER[Protocol Fee Vault / Sweeper] -->|Deposit Fees| VAULT_ATA[Burn Vault Token Account]
+    end
+
+    subgraph Solana_Runtime["On-Chain Solana Anchor Program (stream_burn)"]
+        direction TB
+        SOL_RPC -->|Route Transaction| PROG[stream_burn Program]
+        
+        subgraph Program_Instructions["Program Verification & Guards"]
+            PROG --> AUTH_CHK{Signer & Cooldown Check}
+            AUTH_CHK -->|Valid| SEED_CHK{Validate PDA Seeds}
+            SEED_CHK -->|Seed: 'burn_vault', Mint| CPI_BURN[CPI: spl_token::burn]
+            SEED_CHK -->|Mismatch| ERR_SEED[CustomError::InvalidVaultPDA]
+            AUTH_CHK -->|Cooldown Not Met| ERR_CD[CustomError::CooldownActive]
+        end
+
+        subgraph State_Storage["State Accounts & Ledgers"]
+            CPI_BURN -->|Debit Supply| MINT[STREAM Mint Account]
+            CPI_BURN -->|Debit Tokens| VAULT_ATA
+            CPI_BURN -->|Increment Counters| STATE_PDA[BurnConfig PDA State]
+            STATE_PDA -->|Log Event| EVT[Anchor Event: TokensBurned]
+        end
+    end
+
+    subgraph Offchain_Event_Loop["Off-Chain Automation & X (Twitter) Engine"]
+        direction TB
+        EVT -.->|WebSocket: logsSubscribe| WS_CLIENT[Typescript Event Listener]
+        WS_CLIENT --> PARSE[Anchor Event Parser & Tx Verifier]
+        PARSE --> GRAPHIC[Dynamic SVG/Canvas Metrics Generator]
+        GRAPHIC --> X_API[Twitter/X API v2 Client OAuth 1.0a]
+        X_API -->|POST /2/tweets| TWITTER_FEED[Live Technical Twitter Announcement]
+    end
+
+    style PROG fill:#1e1e2e,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+    style STATE_PDA fill:#313244,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style CPI_BURN fill:#45475a,stroke:#f38ba8,stroke-width:2px,color:#cdd6f4
+    style TWITTER_FEED fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1

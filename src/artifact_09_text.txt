@@ -1,0 +1,13 @@
+🔥 2,500,000 $STREAM HAS BEEN PERMANENTLY BURNED.
+
+The scheduled supply deflation event is finalized on @solana mainnet.
+
+Key Telemetry:
+• Burn Volume: 2,500,000 $STREAM (~$425,000 USD)
+• Circulating Reduction: -1.82%
+• Transaction Slot: #284,912,840
+
+Cryptographic Proof on @SolscanOfficial:
+🔗 https://solscan.io/tx/4mXq9GzWv...STREAM_PROVED
+
+A thread on what this means for tokenomics & protocol velocity 👇 [1/3]

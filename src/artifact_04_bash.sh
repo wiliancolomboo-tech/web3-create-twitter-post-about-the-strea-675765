@@ -1,0 +1,1 @@
+npm install @solana/web3.js @solana/spl-token twitter-api-v2 axios dotenv decimal.js

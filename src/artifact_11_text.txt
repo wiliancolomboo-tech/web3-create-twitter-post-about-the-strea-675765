@@ -1,0 +1,8 @@
+2/ Real protocol utility drives programmatic deflation.
+
+Every vesting schedule, token lock, and payroll stream deployed through @Streamflow_Fi fuels the protocol engine:
+⚡ Automated fee-accrual buybacks
+📉 Irreversible supply reduction
+🛡️ Fully auditable, on-chain SPL Token-2022 burns
+
+Zero manual intervention. Pure cryptographic execution.

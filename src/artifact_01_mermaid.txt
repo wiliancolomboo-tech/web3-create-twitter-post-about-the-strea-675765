@@ -1,0 +1,22 @@
+flowchart TD
+    subgraph Solana_Blockchain ["Solana Mainnet-Beta"]
+        A[STREAM Token Authority / Burn Account] -->|Invoke spl_token::burn / burn_checked| B[Solana Token Program: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA]
+        B -->|Emit Program Logs & State Delta| C[Committed Block / Signature]
+    end
+
+    subgraph StreamBurn_Sentinel ["StreamBurn-Sentinel Autonomous Engine"]
+        D[Solana RPC WebSocket Listener: logsSubscribe] -->|Stream Burn Event Logs| E[Transaction Decoder & Validator]
+        C -.->|Poll Confirmations| E
+        E -->|Extract: Amount, Decimals, Authority, Slot| F[Supply & Market Delta Computer]
+        G[Jupiter Aggregator v2 API] -->|Fetch Live $STREAM / USDC Rate| F
+        F -->|Construct Verified Payload| H[Template & Media Dispatcher]
+    end
+
+    subgraph Distribution_Layer ["Enterprise Social & Alerting Channels"]
+        H -->|POST /2/tweets Thread via OAuth 1.0a / OAuth 2.0| I[X / Twitter API v2]
+        H -->|POST Webhook Audit Payload| J[Discord / Slack Enterprise Channel]
+        H -->|Emit Telemetry Metrics| K[Prometheus / OpenTelemetry Healthcheck]
+    end
+
+    I --> L[Public X Audience / DeFi Ecosystem]
+    J --> M[Core Team / DAO Operators]

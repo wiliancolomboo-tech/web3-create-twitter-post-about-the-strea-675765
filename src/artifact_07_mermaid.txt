@@ -1,0 +1,48 @@
+flowchart TD
+    subgraph Client_and_Keepers [Orchestration & Triggers]
+        Keeper[Permissionless Keeper / Crank]
+        Admin[Protocol Multi-Sig Admin]
+    end
+
+    subgraph Solana_Runtime [Solana On-Chain Programs]
+        subgraph Stream_Program [Stream Burn Program - STRMBurn...]
+            StatePDA[("Protocol State PDA\n['state', mint]")]
+            VaultPDA[("Vault Token PDA\n['vault', mint]")]
+            BurnIX[burn_stream Instruction]
+            EmitEvent[emit! StreamBurned]
+        end
+
+        subgraph SPL_Token_Engine [SPL Token Program]
+            SPLBurn["TokenProgram::Burn CPI"]
+            MintAccount[("STREAM Mint Account\n(supply decreased)")]
+        end
+    end
+
+    subgraph Offchain_Broadcaster [Off-Chain Verification & Social Broadcast]
+        WSListener[Solana RPC WebSocket\nlogsSubscribe / onLogs]
+        Parser[Event Parser & Anchor IDL Decoder]
+        Verifier[Tx Confirmation Verifier\nCommitment: Finalized]
+        TwitterClient[Twitter/X API v2 Engine\nOAuth 1.0a / Bearer]
+        XPlatform["Twitter / X Platform\n(Live Viral Post)"]
+    end
+
+    Keeper -->|Invokes burn_stream| BurnIX
+    Admin -->|Optional Manual Trigger| BurnIX
+    BurnIX -->|Validates Signer & Seeds| StatePDA
+    BurnIX -->|Transfers Auth & Fires CPI| SPLBurn
+    VaultPDA -.->|Token Source Account| SPLBurn
+    SPLBurn -->|Mutates Global State| MintAccount
+    BurnIX -->|Emits Structured Event| EmitEvent
+
+    EmitEvent -->|Streamed via WebSocket| WSListener
+    WSListener --> Parser
+    Parser --> Verifier
+    Verifier -->|Validates Tx Root| TwitterClient
+    TwitterClient -->|Broadcasts Thread| XPlatform
+
+    classDef pda fill:#2a2e39,stroke:#00ffa3,stroke-width:2px,color:#fff;
+    classDef program fill:#1e1e24,stroke:#03e1ff,stroke-width:2px,color:#fff;
+    classDef offchain fill:#22182b,stroke:#dc1fff,stroke-width:2px,color:#fff;
+    class StatePDA,VaultPDA,MintAccount pda;
+    class BurnIX,EmitEvent,SPLBurn program;
+    class WSListener,Parser,Verifier,TwitterClient,XPlatform offchain;

@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph Protocol Governance & Revenue
+        REV[Protocol Streaming Fees / Treasury] -->|Deposit $STREAM| BV[Burn Vault PDA\n'burn_vault' + Mint]
+        CRON[Decentralized Keeper / Clockwork Crank] -->|Triggers ix: burn_tokens| B_IX[burn_stream_tokens Instruction]
+    end
+
+    subgraph Solana Runtime - stream_burn_engine
+        B_IX --> VAL{Security Validations}
+        VAL -->|1. Signer Verification| CHK1[Signer Is Authorized Crank / Admin]
+        VAL -->|2. Invariant Check| CHK2[amount <= Vault Balance]
+        VAL -->|3. Seed Validation| CHK3[Seeds: 'burn_vault', MintPubkey]
+        
+        CHK1 & CHK2 & CHK3 --> CPI[CPI Call: anchor_spl::token::burn]
+        
+        CPI --> SPL_PROGRAM[SPL Token / Token-2022 Program]
+        SPL_PROGRAM -->|Decrement Total Supply| MINT_ACC[STREAM Mint Account\nsupply = supply - delta]
+        SPL_PROGRAM -->|Burn Tokens from PDA| VAULT_ACC[Burn Vault Token Account]
+        
+        CPI --> EVT[Emit Anchor Event:\nTokensBurnedEvent]
+    end
+
+    subgraph Off-Chain Autonomous Oracle & Twitter Publisher
+        EVT -.->|WebSocket RPC: logsSubscribe| BOT[Autonomous Stream Burn Bot\nTypeScript / Node.js Engine]
+        BOT -->|1. Parse Event Log| PARSER[Log & Payload Deserializer]
+        BOT -->|2. Query Solscan / RPC| RPC_V[Fetch Exact Tx Signatures & Token Supply]
+        BOT -->|3. Generate Visual Card| STATS[Format Deflation & Circulating Metrics]
+        BOT -->|4. Twitter API v2 / OAuth 1.0a| TWITTER[X / Twitter API Platform]
+        TWITTER --> LIVE_POST[Live Published Tweet & Thread\nWith Solscan Proof]
+    end
+
+    style BV fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#FFFFFF
+    style B_IX fill:#0F172A,stroke:#F59E0B,stroke-width:2px,color:#FFFFFF
+    style SPL_PROGRAM fill:#1E1B4B,stroke:#818CF8,stroke-width:2px,color:#FFFFFF
+    style MINT_ACC fill:#450A0A,stroke:#EF4444,stroke-width:2px,color:#FFFFFF
+    style BOT fill:#022C22,stroke:#10B981,stroke-width:2px,color:#FFFFFF
+    style LIVE_POST fill:#18181B,stroke:#F43F5E,stroke-width:2px,color:#FFFFFF

@@ -1,0 +1,23 @@
+{
+  "name": "solana-stream-burn-sentinel",
+  "version": "1.0.0",
+  "description": "Production-Grade Solana STREAM Burn Oracle and Twitter Automation Dispatcher",
+  "main": "dist/cli/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/cli/index.ts",
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "inspect": "ts-node src/cli/index.ts"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.8",
+    "@solana/web3.js": "^1.95.2"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.9",
+    "mocha": "^10.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  }
+}

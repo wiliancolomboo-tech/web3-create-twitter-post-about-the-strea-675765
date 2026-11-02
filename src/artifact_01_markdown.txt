@@ -1,0 +1,59 @@
+🧵 1/6: Hard deflation is officially live on @Solana.
+
+Today, the $STREAM Protocol executed its automated on-chain buyback-and-burn mechanism:
+🔥 1,250,000 $STREAM permanently excised from circulation.
+📉 Total Supply delta: 100,000,000 -> 98,750,000 $STREAM
+🧾 Tx Hash: 5KNo...9wQ2 (Verified on Solana Explorer)
+
+Here is the engineering breakdown of how the SPL burn engine executes trustlessly. 👇
+
+---
+
+🧵 2/6: The Architecture: Deterministic & Non-Custodial
+
+No admin keys. No multisig delays. 
+Protocol revenue accrued in the Treasury Escrow PDA (`[b"treasury", mint.key()]`) is swept on-chain via our automated Keeper Crank:
+1. Fee Accumulation (SPL-Token Fee Vault)
+2. CPI Call to SPL Token Program via `token_2022::burn`
+3. Supply State Decrement & On-Chain Event Dispatch
+
+---
+
+🧵 3/6: Cryptographic Proof of Burn
+
+Unlike Web2 "burns" that transfer tokens to unmonitored black holes:
+• We execute `spl_token::instruction::burn_checked` directly against the Mint address.
+• Mint `supply` integer decrements atomically at the runtime level.
+• Zero dead addresses (`1111...1111`) cluttering the state tree.
+
+Verify the state change yourself:
+`solana account <STREAM_MINT_PUBKEY> --output json | jq '.data.parsed.info.supply'`
+
+---
+
+🧵 4/6: Compute Unit (CU) & CPI Efficiency
+
+The burn engine runs on bare-metal Solana performance:
+⚡ Total Execution Budget: 28,450 CUs
+🔒 Security Guards:
+  - Strict PDA seeds check preventing escrow spoofing
+  - Token account freeze/ownership verification
+  - Unchecked accounts eliminated; strict Anchor Account constraints
+
+---
+
+🧵 5/6: Automated Keeper & Relayer Integration
+
+Every burn triggers an event consumed by our decentralized keeper network:
+📡 `emit!(StreamBurnEvent { amount, burned_by, timestamp, new_supply })`
+WebSockets feed real-time indexing directly to our Discord, Telegram, and Twitter/X notification pipelines with cryptographic zero-knowledge confirmation.
+
+---
+
+🧵 6/6: Sustainable Tokenomics at Scale
+
+As protocol throughput expands, the burn rate accelerates programmatically. Value is returned continuously to long-term network participants without intermediate friction.
+
+Inspect the open-source Anchor program, verify the audit report, and track real-time burns:
+🔗 Github: https://github.com/stream-protocol/stream-burn-engine
+📊 Dashboard: https://analytics.streamflow.finance/burn

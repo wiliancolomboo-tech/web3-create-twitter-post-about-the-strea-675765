@@ -1,0 +1,10 @@
++--------+---------------------------------------+--------------------+--------+
+| Test ID| Test Scenario                         | Expected Outcome   | Status |
++--------+---------------------------------------+--------------------+--------+
+| QA-001 | Top-level SPL Burn instruction        | Parsed & Dispatched| PASS   |
+| QA-002 | Inner Instruction Burn (CPI Call)     | Parsed & Dispatched| PASS   |
+| QA-003 | Erroneous/Failed Solana Tx (err != 0) | Gracefully Skipped | PASS   |
+| QA-004 | Replay of same Signature              | Blocked by Dedup   | PASS   |
+| QA-005 | Sub-0.01% Burn Formatting             | Formats "<0.01%"   | PASS   |
+| QA-006 | Network Disconnect from RPC WS        | Automatic Backoff  | PASS   |
++--------+---------------------------------------+--------------------+--------+

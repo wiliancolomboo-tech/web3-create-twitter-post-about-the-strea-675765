@@ -1,0 +1,18 @@
+# Solana Network Configuration
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+STREAM_MINT_ADDRESS=STREAMribCwyznnKjpHrPohwf2NmT1n7x5kYpW9W3N99
+
+# Twitter API v2 Credentials (Elevated Access)
+TWITTER_API_KEY=your_twitter_api_key
+TWITTER_API_SECRET=your_twitter_api_secret
+TWITTER_ACCESS_TOKEN=your_access_token
+TWITTER_ACCESS_SECRET=your_access_token_secret
+
+# Enterprise Notification Hooks (Optional)
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+
+# Execution Mode
+DRY_RUN=false
+PORT=8080

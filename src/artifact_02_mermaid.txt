@@ -1,38 +1,36 @@
 flowchart TD
-    subgraph Client & Protocol Keepers
-        KP[Autonomous Crank / Keeper Bot]
-        US[Streaming Yield / Fee Settler]
+    subgraph Solana_Blockchain [Solana Layer 1 Runtime]
+        A[Burner Wallet / Protocol Engine] -->|SPL Token BurnChecked| B[SPL Token Program / STREAM Mint PDA]
+        B -->|Emit Burn Instruction| C[Confirmed Solana Block]
+        C -->|Log Burn Event / PDA Proof| D[stream_burn_verifier Program PDA]
     end
 
-    subgraph Solana Runtime - Stream Burn Engine
-        direction TB
-        VA[Burn Config PDA\nb"burn_config", mint]
-        VT[Vault Token Account\nb"burn_vault", mint]
-        TK[SPL Token Program / Token-2022]
-        MT[STREAM Mint Account]
-        
-        US -->|1. deposit_to_burn(amount)| VT
-        KP -->|2. execute_burn(min_threshold)| VA
-        VA -.->|PDA Seeds Auth| VT
-        VA -->|3. CPI: spl_token::burn| TK
-        TK -->|4. Destroy Tokens & Decrement Supply| MT
-        VA -->|5. Emit StreamBurnedEvent| EV[Program Log Emit]
+    subgraph Ingestion_Layer [stream-burn-oracle Event Ingestion]
+        E[Solana Geyser / Primary WebSocket RPC] -.->|logsSubscribe / onLogs| F[RPC Failover & Reconnect Pool]
+        C -.->|Block Streaming| E
+        F --> G[Transaction Deserializer & Instruction Parser]
+        G --> H{STREAM Mint Match?}
+        H -- No --> I[Discard Instruction]
+        H -- Yes --> J[Signature & Nonce Cryptographic Verifier]
     end
 
-    subgraph Off-Chain Social Verification Engine
-        direction TB
-        WS[Solana RPC Geyser / WebSocket]
-        EV -.->|6. logsSubscribe Filter| WS
-        WS -->|7. Ingest Event Payload| ENG[Verification & Formatting Engine]
-        ENG -->|8. Fetch getMint & Compute Supply %| RPC[Solana JSON-RPC]
-        ENG -->|9. Sign Twitter/X API Payload| XAUTH[OAuth 1.0a / 2.0 Auth]
-        XAUTH -->|10. POST /2/tweets| XAPI[X / Twitter API]
+    subgraph Data_Enrichment [Financial & Metadata Telemetry]
+        J --> K[Solana RPC: Get Current Token Supply Delta]
+        J --> L[Jupiter API v6 / Pyth: Real-time STREAM/USDC Spot Price]
+        K --> M[Payload Synthesis & ASCII Burn Formatter]
+        L --> M
     end
 
-    classDef anchor fill:#14F195,stroke:#000,stroke-width:1.5px,color:#000;
-    classDef offchain fill:#9945FF,stroke:#000,stroke-width:1.5px,color:#fff;
-    classDef solana fill:#1e1e1e,stroke:#14F195,stroke-width:1px,color:#fff;
-    
-    class VA,VT,EV anchor;
-    class WS,ENG,XAUTH,XAPI offchain;
-    class TK,MT,RPC solana;
+    subgraph Enterprise_Dispatch [Multi-Channel Social & Telemetry Pipeline]
+        M --> N[Twitter / X Dispatcher - OAuth 1.0a / v2 API]
+        M --> O[Discord Enterprise Rich Embed Webhook]
+        M --> P[Slack Ops Incident & Burn Audit Channel]
+        M --> Q[Prometheus Metrics Engine /healthz]
+    end
+
+    subgraph Social_Consumers [Public & Enterprise Stakeholders]
+        N --> R[Twitter / X Community Feed]
+        O --> S[Streamflow Community Discord]
+        P --> T[Treasury & DevOps Incident Response]
+        Q --> U[Grafana Observability Dashboard]
+    end

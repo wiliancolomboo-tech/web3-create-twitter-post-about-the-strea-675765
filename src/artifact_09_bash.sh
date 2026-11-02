@@ -1,2 +1,2 @@
-# Launch a local test validator and run Mocha integration tests
-anchor test
+cp .env.example .env
+   # Populate Twitter Developer API v2 Credentials and Solana RPC Endpoints

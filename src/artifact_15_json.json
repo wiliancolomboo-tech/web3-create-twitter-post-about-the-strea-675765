@@ -1,0 +1,10 @@
+{
+  "status": "HEALTHY",
+  "running": true,
+  "uptime_seconds": 142.8,
+  "metrics": {
+    "totalBurned": 1250000,
+    "totalUsd": 312500,
+    "count": 14
+  }
+}

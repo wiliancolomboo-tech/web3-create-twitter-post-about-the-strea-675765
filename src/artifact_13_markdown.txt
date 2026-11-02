@@ -1,0 +1,10 @@
+2/ How did we get here?
+
+Every time protocols stream payroll, vest allocations, or lock liquidity on @streamflow_fi, protocol fees are collected. 
+
+A programmatic portion of these protocol fees is routed directly into token burns:
+• No artificial inflation
+• No re-mintable backdoors
+• Pure circulating supply reduction
+
+Utility ➡️ Revenue ➡️ Deflation.

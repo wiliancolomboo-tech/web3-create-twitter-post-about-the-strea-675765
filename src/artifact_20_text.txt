@@ -1,0 +1,8 @@
+Transparency isn't optional—it's cryptographic.
+
+Our open-source sentinel bot tracks every verified burn in real-time straight from the Solana runtime, ensuring zero-lag reporting and zero phishing risk.
+
+Track the ongoing supply reduction live on @Solscan:
+🔗 https://solscan.io/token/[INSERT_STREAM_MINT]
+
+Drop a 🔥 if you’re holding $STREAM for the long game! #Solana #DeFi

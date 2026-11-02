@@ -1,0 +1,10 @@
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+STREAM_MINT_ADDRESS=STREAMribV5nmpw7uBh4s55K8f5vFvK8p8C8bV9zB2S
+STREAM_DECIMALS=9
+TWITTER_API_KEY=your_x_api_key
+TWITTER_API_SECRET=your_x_api_secret
+TWITTER_ACCESS_TOKEN=your_x_access_token
+TWITTER_ACCESS_SECRET=your_x_access_secret
+DISCORD_SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DB_PATH=/data/sentinel.db

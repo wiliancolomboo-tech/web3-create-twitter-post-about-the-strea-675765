@@ -1,0 +1,50 @@
+flowchart TD
+    subgraph Client_and_Keepers["External Actors & Triggers"]
+        KEEPER["Permissionless Keeper Bot"]
+        ORACLE["Price / Volume Threshold Monitor"]
+    end
+
+    subgraph Solana_Runtime["Solana Runtime: Anchor Program"]
+        CONFIG["BurnConfig PDA<br/>seeds=['burn-config', mint]"]
+        VAULT["BurnVault Token Account<br/>seeds=['burn-vault', mint]<br/>Owner: Program Authority PDA"]
+        PROGRAM["Stream Burn Engine<br/>Instruction: execute_burn"]
+        SPL_TOKEN["SPL Token Program / Token-2022<br/>Program ID: Tokenkeg..."]
+        MINT["$STREAM Mint Account<br/>Supply State"]
+    end
+
+    subgraph Event_and_Log["Solana Core Telemetry"]
+        EVENT["Anchor Program Event<br/>StreamBurnedEvent"]
+    end
+
+    subgraph Offchain_Pipeline["Off-Chain Social Automation Layer"]
+        RPC_SUB["Solana RPC WebSocket / Geyser<br/>logsSubscribe(StreamBurnEngine)"]
+        PARSER["Payload Parser & Stat Engine"]
+        TWITTER_CLIENT["Twitter API v2 REST Client"]
+        X_FEED["Public Twitter / X Timeline"]
+    end
+
+    %% Flow Execution
+    KEEPER -->|"1. Invoke execute_burn(amount)"| PROGRAM
+    ORACLE -.->|"Optional: Trigger Threshold Signal"| KEEPER
+
+    PROGRAM -->|"2. Validate Signers, Seeds & Min Threshold"| CONFIG
+    PROGRAM -->|"3. Read Balance"| VAULT
+
+    PROGRAM -->|"4. CPI: Token::Burn(amount)"| SPL_TOKEN
+    SPL_TOKEN -->|"5. Decrement Supply Field"| MINT
+    SPL_TOKEN -->|"6. Burn Tokens"| VAULT
+
+    PROGRAM -->|"7. Emit Event(amount, remaining_supply, timestamp)"| EVENT
+
+    EVENT -->|"8. Push Block Log"| RPC_SUB
+    RPC_SUB -->|"9. Ingest Raw Log"| PARSER
+    PARSER -->|"10. Format Thread & Compute APY/Burn %"| TWITTER_CLIENT
+    TWITTER_CLIENT -->|"11. Dispatch Cryptographic Thread"| X_FEED
+
+    %% Style classes
+    classDef runtime fill:#1e1e2e,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4;
+    classDef external fill:#181825,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4;
+    classDef offchain fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4;
+    class CONFIG,VAULT,PROGRAM,SPL_TOKEN,MINT,EVENT runtime;
+    class KEEPER,ORACLE external;
+    class RPC_SUB,PARSER,TWITTER_CLIENT,X_FEED offchain;

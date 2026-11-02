@@ -1,0 +1,7 @@
+Why this burn is different: 100% autonomous, zero marketing fluff. 
+
+1️⃣ Protocol Revenue: Streaming fees directly fund real-time buyback smart contracts.
+2️⃣ CPI Burn: Tokens are routed into our SPL Token Burn Engine PDA and verifiably destroyed on-chain.
+3️⃣ Real-Time Social Oracle: Our automated Sentinel checks log events on Solana RPCs and broadcasts directly to the community in real time.
+
+Deflation is built into the protocol DNA, not managed by a spreadsheet. ⚙️⛓️ (2/3)

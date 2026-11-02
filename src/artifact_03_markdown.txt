@@ -1,0 +1,53 @@
+🧵 THREAD: Engineering Deflation on @Solana — The $STREAM Continuous Burn Architecture.
+
+Today at Unix epoch 1714564800, the protocol executed Burn Event #042 via programmatic CPI.
+
+🔥 2,450,000 $STREAM ($1.84M USD) has been permanently burned from circulation.
+
+Deep dive into the on-chain mechanics below 👇 [1/7]
+
+---
+
+2/ The Invariant:
+Traditional manual buybacks suffer from latency, MEV frontrunning, and administrative centralization.
+
+$STREAM uses an autonomous Anchor program (`StrMBurn...Engine`) coupled with our real-time streaming fee splitter. Protocol fees flow directly into a PDA-controlled Vault (`burn_vault`). No human custody. No multisig delay. [2/7]
+
+---
+
+3/ Execution Mechanics:
+When `vault.amount >= burn_threshold`, any decentralized keeper can invoke `execute_burn()`.
+The program invokes `token::burn` via Cross-Program Invocation (CPI), using PDA seeds:
+`[b"burn_vault", mint.key().as_ref(), &[vault_bump]]`
+
+The SPL Token Mint supply decreases atomically in the exact same slot. [3/7]
+
+---
+
+4/ Proof-of-Burn Quantitative Impact:
+• Block Slot: 262,810,495
+• Tx Hash: 4vK9...8fWq
+• Total Burned to Date: 18,920,000 $STREAM (3.784% of Total Supply)
+• Remaining Circulating Supply: 481,080,000 $STREAM
+• Velocity: -0.42% supply per 30-day rolling epoch
+
+Explorer Verification: https://solscan.io/tx/4vK9J...8fWq [4/7]
+
+---
+
+5/ Compute Unit (CU) & Security Optimizations:
+• Total execution compute consumed: 18,240 CUs (sub-1 cent priority fee).
+• Formal verification: PDA seed constraint checks (`has_one = vault`), zero unchecked arithmetic (`checked_add`), and cooldown clock invariants prevent reentrancy and replay drain attacks. [5/7]
+
+---
+
+6/ What this means for $STREAM Stakers & LPs:
+By tying streaming protocol volume directly to unrecoverable supply reduction, token velocity ($V = T/M$) drops as protocol throughput climbs. Real yield without inflationary dilution. [6/7]
+
+---
+
+7/ Verify, don't trust.
+Inspect the open-source Anchor program, verify the CPI logs, and monitor the automated burn keeper bot on GitHub:
+👉 https://github.com/stream-protocol/stream-burn-engine
+
+Retweet to support trustless deflation on Solana. 🦀🔥 #Solana #DeFi #Tokenomics #STREAM

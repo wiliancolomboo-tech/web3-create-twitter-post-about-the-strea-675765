@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  stream-burn-oracle:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stream-burn-oracle
+    restart: always
+    environment:
+      - PORT=8080
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - SOLANA_WS_URL=${SOLANA_WS_URL:-wss://api.mainnet-beta.solana.com}
+      - STREAM_MINT_ADDRESS=${STREAM_MINT_ADDRESS:-STREAMribRwybzpKq5x9bqwPz5B4i1Xv1qFz5q8Gk8vU}
+      - STREAM_DECIMALS=9
+      - MIN_BURN_THRESHOLD=100
+      - TWITTER_BROADCAST_ENABLED=${TWITTER_BROADCAST_ENABLED:-false}
+      - TWITTER_API_KEY=${TWITTER_API_KEY}
+      - TWITTER_API_SECRET=${TWITTER_API_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

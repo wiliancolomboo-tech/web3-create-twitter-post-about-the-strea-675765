@@ -1,0 +1,7 @@
+2/ Why does the $STREAM burn matter?
+
+💎 Mathematical Scarcity: Circulating supply drops permanently, concentrating protocol value among long-term stakeholders.
+⚡ Realized Protocol Velocity: Every token burned reflects active on-chain usage, streaming volume, and automated treasury buybacks.
+🛡 Zero Guesswork: Audited Anchor program settlement with complete open-source transparency.
+
+Deflation isn't a promise—it's codified in Rust. 🦀

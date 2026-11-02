@@ -1,0 +1,15 @@
+SOLANA_RPC_URL="https://api.mainnet-beta.solana.com"
+SOLANA_WSS_URL="wss://api.mainnet-beta.solana.com"
+STREAM_MINT_ADDRESS="STREAMbdnSQ2wSpz5hZ9538G3Qv8z3r3d5t7Z1q91111"
+STREAM_DECIMALS=9
+MIN_BURN_ALERT_THRESHOLD=1000
+
+# Twitter / X Developer Credentials
+TWITTER_APP_KEY="your_api_key"
+TWITTER_APP_SECRET="your_api_secret"
+TWITTER_ACCESS_TOKEN="your_access_token"
+TWITTER_ACCESS_SECRET="your_access_token_secret"
+
+# Enterprise Alerting Webhook (Discord / Slack)
+DISCORD_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"
+DB_PATH="./burn_sentinel.db"

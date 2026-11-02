@@ -1,0 +1,7 @@
+2/ How the $STREAM Burn Works Under the Hood:
+
+⚙️ Cashflow Engine: Every time a DAO, founder, or enterprise streams payroll or schedules linear token locks on Streamflow, fees accrue in the treasury vault.
+🔄 Buyback Vector: Capital is systematically routed to buy $STREAM directly from the open market.
+🔥 On-Chain Extinction: Tokens are sent to the SPL Token burn instruction—irreversibly reducing circulating and maximum supply on @solana.
+
+No synthetic locks. No false promises. Pure verifiable supply contraction.

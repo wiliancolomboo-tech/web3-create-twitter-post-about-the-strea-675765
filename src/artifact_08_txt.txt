@@ -1,0 +1,6 @@
+✔ StreamBurn Complete Verification & Formatting Suite (5 tests passed)
+  ✔ generates a thread of exactly 3 tweets (1.2ms)
+  ✔ formats token amounts with proper thousand separators and decimals (0.4ms)
+  ✔ guarantees tweets remain strictly under Twitter 280-character boundary (0.5ms)
+  ✔ includes cryptographic verification links and explorer deep links (0.3ms)
+  ✔ correctly incorporates arbitrary burn memos (0.3ms)

@@ -1,0 +1,25 @@
+{
+  "name": "streamburn-sentinel",
+  "version": "1.0.0",
+  "description": "Enterprise Solana Token Burn Verification & Social Broadcast Engine",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.4.1",
+    "@solana/web3.js": "^1.91.4",
+    "axios": "^1.6.8",
+    "bignumber.js": "^9.1.2",
+    "dotenv": "^16.4.5",
+    "twitter-api-v2": "^1.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
+  }
+}

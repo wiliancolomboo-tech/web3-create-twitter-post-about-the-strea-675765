@@ -1,0 +1,51 @@
+flowchart TD
+    subgraph Protocol_Context ["Protocol Context & Account State"]
+        Admin[("Protocol Governor / Multicoin DAO")]
+        FeePayer[("Keeper / Execution Bot")]
+        Mint["STREAM Token Mint (Decimals: 6)"]
+        BurnVaultPDA["Burn Vault PDA (Authority)\nSeeds: ['burn_vault', Mint]"]
+        BurnVaultATA["Burn Vault ATA (Token Account)\nOwner: BurnVaultPDA"]
+        ConfigAccount["Config State Account\nSeeds: ['config']\nContains: total_burned, rate_limit"]
+    end
+
+    subgraph Program_Execution ["Anchor Program Execution (stream_burn_core)"]
+        IxBurn["Instruction: execute_burn(amount)"]
+        Guard1{"Validate Signer &\nRate Limits"}
+        Guard2{"Validate ATA & Mint\nConsistency"}
+        CPI_SPL["CPI: spl_token::instruction::burn"]
+        EmitEvent["Emit Event: TokenBurnEvent\n- amount\n- total_burned\n- slot\n- timestamp"]
+    end
+
+    subgraph Runtime_And_Events ["Solana Runtime & Log Stream"]
+        SPLProgram["SPL Token Program / Token-2022"]
+        SolanaLogs["Solana Event / Log Bus\n('Program Log: TokenBurnEvent')"]
+    end
+
+    subgraph Keeper_Broadcaster ["Off-Chain Verification & Twitter Broadcaster"]
+        WSClient["WebSocket / Geyser RPC Listener\n(logsSubscribe / geyser-grpc)"]
+        SignatureFetcher["Commitment: 'confirmed' / 'finalized'\nFetch Tx Details & Compute Deltas"]
+        TwitterEngine["Twitter API v2 Signer / Publisher\n(OAuth 1.0a / OAuth 2.0 PKCE)"]
+        SocialOutput["Twitter / X Production Post\n(With Tx Hash & Tokenomics Metrics)"]
+    end
+
+    %% Execution Relationships
+    Admin -->|"1. Initialize Engine & Vault"| ConfigAccount
+    FeePayer -->|"2. Invoke execute_burn"| IxBurn
+    IxBurn --> Guard1
+    Guard1 -->|"Pass"| Guard2
+    Guard2 -->|"Pass"| CPI_SPL
+    
+    BurnVaultPDA -.->|"Signer Seeds (bump)"| CPI_SPL
+    BurnVaultATA -->|"Debit Balance"| CPI_SPL
+    Mint -->|"Decrease Supply"| CPI_SPL
+    CPI_SPL -->|"Execute Mint Supply Burn"| SPLProgram
+    
+    SPLProgram -->|"Success"| EmitEvent
+    EmitEvent -->|"Push to Block Engine"| SolanaLogs
+    
+    %% Keeper & Off-Chain Flow
+    SolanaLogs -->|"Subscribe Event Filter"| WSClient
+    WSClient -->|"Trigger Payload"| SignatureFetcher
+    SignatureFetcher -->|"Fetch Supply & Verify PDA"| Mint
+    SignatureFetcher -->|"Format Structured Thread"| TwitterEngine
+    TwitterEngine -->|"Publish Tweet"| SocialOutput

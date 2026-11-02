@@ -1,0 +1,10 @@
+SOLANA_RPC_URL="https://mainnet.helius-rpc.com/?api-key=YOUR_KEY"
+SOLANA_WS_URL="wss://mainnet.helius-rpc.com/?api-key=YOUR_KEY"
+STREAM_MINT_ADDRESS="STREAMrib5udc3iohQUKSLd7u6fP8NqYhJbF1R6e2b"
+
+TWITTER_API_KEY="YOUR_API_KEY"
+TWITTER_API_SECRET="YOUR_API_SECRET"
+TWITTER_ACCESS_TOKEN="YOUR_ACCESS_TOKEN"
+TWITTER_ACCESS_SECRET="YOUR_ACCESS_SECRET"
+
+DISCORD_WEBHOOK_URL="https://api.example.com/webhooks/alerts/placeholder"

@@ -1,0 +1,52 @@
+flowchart TD
+    subgraph Client_Keeper["Off-Chain Layer (Keepers & Observers)"]
+        K1["Automated Keeper Bot / Crank"]
+        TB["Twitter/X Broadcast Daemon"]
+        TW["Twitter / X API v2 Endpoint"]
+    end
+
+    subgraph Solana_Runtime["Solana On-Chain Runtime (Sealevel Engine)"]
+        subgraph Program["stream_burn_engine Program"]
+            IX["burn_tokens Instruction"]
+            AUTH["Guard: Protocol Authority / Crank Signer"]
+            PDA_DERIVE["Seeds Validation: ['burn_vault', mint_key]"]
+            EMIT["emit!(TokensBurnedEvent)"]
+        end
+
+        subgraph Accounts["Account State & PDAs"]
+            VAULT_CONFIG["BurnConfig Account<br/>- authority: Pubkey<br/>- total_burned: u64<br/>- burn_count: u64<br/>- bump: u8"]
+            VAULT_ATA["Vault Token Account (PDA ATA)<br/>- Holds protocol fees<br/>- Owner: burn_config PDA"]
+            MINT_ACC["STREAM Mint Account<br/>- supply: u64 (Decremented)"]
+        end
+
+        subgraph System_Programs["External Program Invocations"]
+            TOKEN_PROG["SPL Token Program (Tokenkeg...)"]
+        end
+    end
+
+    %% Execution Path
+    K1 -- "1. Sends burn_tokens(amount) TX" --> IX
+    IX --> AUTH
+    AUTH -- "Pass" --> PDA_DERIVE
+    PDA_DERIVE --> VAULT_CONFIG
+
+    IX -- "2. Cross-Program Invocation (invoke_signed)" --> TOKEN_PROG
+    TOKEN_PROG -- "3. Decrements supply" --> MINT_ACC
+    TOKEN_PROG -- "4. Destroys tokens in" --> VAULT_ATA
+    
+    TOKEN_PROG -. "CPI Success" .-> IX
+    IX -- "5. Mutates state (total_burned += amount)" --> VAULT_CONFIG
+    IX -- "6. Records Event" --> EMIT
+
+    %% Off-chain event ingestion and publishing
+    EMIT -. "7. WebSocket (logsSubscribe / onLogs)" .-> TB
+    TB -- "8. Parses Event & Confirms Finality" --> TB
+    TB -- "9. OAuth 1.0a / 2.0 Signed Payload" --> TW
+    TW -- "10. Broadcasts Public Post to Timeline" --> Users["Public / Community"]
+
+    classDef primary fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef highlight fill:#0284c7,stroke:#0369a1,stroke-width:2px,color:#ffffff;
+    classDef success fill:#065f46,stroke:#10b981,stroke-width:2px,color:#ffffff;
+    class K1,TB,TW primary;
+    class IX,AUTH,PDA_DERIVE,EMIT highlight;
+    class VAULT_CONFIG,VAULT_ATA,MINT_ACC,TOKEN_PROG success;

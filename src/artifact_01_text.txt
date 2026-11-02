@@ -1,0 +1,10 @@
+🚨 $STREAM ON-CHAIN SUPPLY CONTRACTION DETECTED 🚨
+
+⚡️ 1,250,000 $STREAM ($187,500 USD) permanently incinerated in Block #284,910,214.
+🔥 Cumulative Deflation: 4.82% of circulating supply removed permanently.
+
+Tx: 5Kov...9xWq (Solana finalized)
+Proof: https://solscan.io/tx/5Kov7J2B8a9xWq...
+
+A breakdown of the protocol buyback mechanics, CPI routing, and supply decay dynamics 👇🧵
+#Solana #DeFi #Tokenomics #STREAM

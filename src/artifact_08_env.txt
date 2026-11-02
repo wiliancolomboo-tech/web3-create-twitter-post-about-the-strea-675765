@@ -1,0 +1,9 @@
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+STREAM_MINT_ADDRESS=STREAMt4snhfdfW2tF54Uu5wV4vA1q1111111111111
+TWITTER_APP_KEY=your_x_consumer_key
+TWITTER_APP_SECRET=your_x_consumer_secret
+TWITTER_ACCESS_TOKEN=your_x_access_token
+TWITTER_ACCESS_SECRET=your_x_access_token_secret
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DB_PATH=./sentinel.sqlite

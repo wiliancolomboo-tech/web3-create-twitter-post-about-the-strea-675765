@@ -1,0 +1,8 @@
+2/ How does this burn work under the hood?
+
+Protocol revenue generated via @streamflow_fi streaming vesting, token locks, and payroll fees is systematically directed into the Burn PDA.
+
+Using SPL-Token BurnChecked, tokens are destroyed irreversibly:
+- Decimals: 9
+- Non-recoverable zero-address mint sink
+- Verified via our automated on-chain telemetry engine

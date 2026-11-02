@@ -1,0 +1,9 @@
+How does the $STREAM burn loop work?
+
+1️⃣ Protocol Revenue: Streamflow processes billions in streaming payroll & vesting volume.
+2️⃣ Buyback Engine: A dedicated share of protocol fees purchases $STREAM from the open market.
+3️⃣ Irreversible CPI Burn: Tokens are sent to the SPL Token incinerator—zero keys, zero retrieval.
+
+Value flows directly to holders. 📈🌊
+
+🧵 (2/3) 👇

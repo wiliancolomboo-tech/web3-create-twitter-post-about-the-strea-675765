@@ -1,0 +1,23 @@
+{
+  "name": "stream-burn-sentinel",
+  "version": "1.0.0",
+  "description": "Enterprise Solana burn tracker and autonomous social dispatcher",
+  "main": "dist/stream-sentinel.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/stream-sentinel.js",
+    "test": "ts-node tests/stream_burn_verifier.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
+    "@solana/spl-token": "^0.4.8",
+    "@solana/web3.js": "^1.95.3",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "twitter-api-v2": "^1.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "typescript": "^5.6.2"
+  }
+}

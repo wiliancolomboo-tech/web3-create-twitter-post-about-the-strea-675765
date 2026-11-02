@@ -1,0 +1,11 @@
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+PROGRAM_ID=StrBurn111111111111111111111111111111111111
+STREAM_MINT=STREAM3333333333333333333333333333333333333
+REDIS_URL=redis://localhost:6379
+TWITTER_API_KEY=your_x_api_key
+TWITTER_API_SECRET=your_x_api_secret
+TWITTER_ACCESS_TOKEN=your_access_token
+TWITTER_ACCESS_SECRET=your_access_secret
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder

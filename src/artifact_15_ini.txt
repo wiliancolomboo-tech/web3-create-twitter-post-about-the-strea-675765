@@ -1,0 +1,18 @@
+# Solana Cluster RPC
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+STREAM_MINT=STREAM5555555555555555555555555555555555555
+
+# Twitter / X API v2 Credentials (Elevated Developer Access)
+TWITTER_API_KEY=your_x_consumer_api_key
+TWITTER_API_SECRET=your_x_consumer_secret
+TWITTER_ACCESS_TOKEN=your_x_oauth1_access_token
+TWITTER_ACCESS_SECRET=your_x_oauth1_token_secret
+
+# Multi-channel Enterprise Telemetry
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+RESEND_API_KEY=re_123456789abcdef
+NOTIFICATION_EMAIL=ops@streamflow.finance
+
+# Observability
+LOG_LEVEL=info
+PORT=8080

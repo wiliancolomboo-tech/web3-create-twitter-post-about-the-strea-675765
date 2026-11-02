@@ -1,0 +1,28 @@
+{
+  "name": "stream-burn-watchdog",
+  "version": "1.0.0",
+  "description": "Autonomous Solana SPL Token Burn Monitor & Social Oracle for Streamflow",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.52",
+    "@solana/spl-token": "^0.4.6",
+    "@solana/web3.js": "^1.91.8",
+    "axios": "^1.6.8",
+    "better-sqlite3": "^9.6.0",
+    "dotenv": "^16.4.5",
+    "twitter-api-v2": "^1.16.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.10",
+    "@types/node": "^20.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}

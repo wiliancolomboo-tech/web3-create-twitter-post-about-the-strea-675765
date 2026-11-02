@@ -1,0 +1,20 @@
+# Solana RPC Endpoints (Helius / Triton / QuickNode recommended for production)
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+
+# $STREAM Token Parameters
+STREAM_MINT_ADDRESS=STREAM5dxkWL76uhwK2XmJ472V7mQzKqgL6m312pA6R
+STREAM_DECIMALS=9
+
+# X / Twitter Developer API v2 Credentials
+TWITTER_API_KEY=your_twitter_api_key
+TWITTER_API_SECRET=your_twitter_api_secret
+TWITTER_ACCESS_TOKEN=your_twitter_access_token
+TWITTER_ACCESS_SECRET=your_twitter_access_token_secret
+
+# Optional Enterprise Webhook (Discord / Slack)
+ENTERPRISE_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+
+# Flag for Testing (Set to true to parse without executing live tweets)
+DRY_RUN=false
+PORT=8080

@@ -1,0 +1,14 @@
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+SOLANA_WSS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+PROGRAM_ID=StrMBurnEngine11111111111111111111111111111
+STREAM_MINT=STREAMxxxxxxTokenMintAddressSample11111111
+STREAM_DECIMALS=9
+STREAM_INITIAL_SUPPLY=1000000000
+
+TWITTER_APP_KEY=your_twitter_api_key
+TWITTER_APP_SECRET=your_twitter_api_secret
+TWITTER_ACCESS_TOKEN=your_oauth1_access_token
+TWITTER_ACCESS_SECRET=your_oauth1_access_token_secret
+
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+PORT=8080

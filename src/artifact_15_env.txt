@@ -1,0 +1,19 @@
+# Solana Network Configuration
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+STREAM_MINT_ADDRESS=STREAMribRwybzpKq5x9bqwPz5B4i1Xv1qFz5q8Gk8vU
+STREAM_DECIMALS=9
+MIN_BURN_THRESHOLD=500
+
+# Social Integrations
+TWITTER_BROADCAST_ENABLED=true
+TWITTER_API_KEY=your_x_consumer_key
+TWITTER_API_SECRET=your_x_consumer_secret
+TWITTER_ACCESS_TOKEN=your_x_access_token
+TWITTER_ACCESS_SECRET=your_x_access_secret
+
+# Enterprise Webhooks
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+
+PORT=8080

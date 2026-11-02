@@ -1,0 +1,21 @@
+# Solana Network Configuration
+SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+
+# Target Mint (STREAM Token Mint on Solana)
+STREAM_MINT_ADDRESS=STREAM324x26QvBwdmTu2g6n7EwA9P3B3E5gR3q9burn
+STREAM_DECIMALS=9
+MIN_BURN_THRESHOLD=100
+
+# Twitter / X API v2 Credentials (Elevated Developer Access)
+TWITTER_API_KEY=YOUR_CONSUMER_KEY
+TWITTER_API_SECRET=YOUR_CONSUMER_SECRET
+TWITTER_ACCESS_TOKEN=YOUR_USER_ACCESS_TOKEN
+TWITTER_ACCESS_SECRET=YOUR_USER_ACCESS_SECRET
+
+# Operational Alert Webhooks (Optional)
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+
+# Server Telemetry
+PORT=8080

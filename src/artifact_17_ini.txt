@@ -1,0 +1,17 @@
+# Solana Cluster Endpoints
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+
+# Token Configuration
+STREAM_MINT_ADDRESS=STREAMmP2XjXFqV8i4g6j2uLq5C8wF4rUoVqM7hR3d5e
+MIN_BURN_THRESHOLD=1000
+
+# Twitter / X API v2 Credentials
+TWITTER_API_KEY=your_api_key
+TWITTER_API_SECRET=your_api_secret
+TWITTER_ACCESS_TOKEN=your_access_token
+TWITTER_ACCESS_SECRET=your_access_secret
+
+# Observability Webhooks (Optional)
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder

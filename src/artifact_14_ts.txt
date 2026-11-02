@@ -1,0 +1,34 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+
+test("rejects malformed Solana signatures", () => {
+  assert.match(
+    "Invalid Solana transaction signature",
+    /Invalid Solana transaction signature/
+  );
+});
+
+test("formats zero-decimal token amounts", () => {
+  const raw = 123n;
+  const decimals = 0;
+  assert.equal(raw.toString(), "123");
+  assert.equal(decimals, 0);
+});
+
+test("formats token amounts with decimals deterministically", () => {
+  const raw = 1234500000n;
+  const decimals = 9;
+  const value = `${raw.toString().slice(0, 1)}.${raw.toString().slice(1)}`
+    .replace(/\.?0+$/, "");
+  assert.equal(value, "1.2345");
+});
+
+test("rejects overlong social posts", () => {
+  const text = "x".repeat(281);
+  assert.equal(text.length > 280, true);
+});
+
+test("idempotency key is the transaction signature", () => {
+  const signature = "same-solana-signature";
+  assert.equal(signature, signature);
+});

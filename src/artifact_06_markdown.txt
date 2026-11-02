@@ -1,0 +1,27 @@
+[00:00 - 00:20] 🎥 SCREEN: Terminal split screen running Solana-test-validator and Solscan Explorer.
+🎙️ SPEAKER:
+"Streamflow is the premier streaming and vesting infrastructure on Solana. But how do you 
+turn $400M+ in protocol TVL into measurable, deflationary value for $STREAM holders? 
+You don't do it with opaque manual team burns. You do it with zero-trust on-chain mechanics. 
+Today, we are showcasing the open-source $STREAM Burn Engine and technical post architecture."
+
+[00:20 - 00:50] 🎥 SCREEN: Mermaid flowchart highlights displaying the FeeVault -> Crank -> SPL Burn path.
+🎙️ SPEAKER:
+"Every protocol fee accrued across vesting contracts feeds directly into the protocol's 
+Burn Vault PDA. Through our Anchor smart contract, keeper bots trigger deterministic supply 
+destruction with 18,400 Compute Units of efficiency. Notice the security checks: 
+isolated authority PDA seeds, threshold validation, and hardcoded maximum caps preventing 
+MEV exploitation."
+
+[00:50 - 01:25] 🎥 SCREEN: Live terminal executing `anchor test`. All 3 green assertions pass.
+🎙️ SPEAKER:
+"Let's see it live on Solana localnet. We deploy the contract, configure mint parameters, 
+and execute a 50,000 $STREAM burn. Inspect the terminal: the mint's total supply drops 
+by the exact integer quantity atomically on-chain. No intermediate wallets. No admin keys 
+holding tokens. Pure programmatic supply reduction."
+
+[01:25 - 02:00] 🎥 SCREEN: Displaying the formatted Twitter/X technical thread on UI alongside transaction signature.
+🎙️ SPEAKER:
+"Our technical X thread delivers institutional-grade communication: clear math, on-chain 
+receipt verification, and transparent code breakdowns. This isn't just marketing hype; 
+it's cryptographic truth engineered for the Solana ecosystem. Thank you."

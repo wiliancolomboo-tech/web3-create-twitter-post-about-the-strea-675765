@@ -1,0 +1,35 @@
+flowchart TD
+    subgraph Protocol_Fee_Generation [1. Protocol Revenue Ingestion]
+        User[End User / Organization] -->|Streamflow Protocol Fees| FeeRouter[Streamflow Fee Collector]
+        FeeRouter -->|SPL Token Transfer| VaultPDA[Vault PDA: stream_fee_vault\nSeeds: 'vault', mint_key]
+    end
+
+    subgraph OnChain_Engine [2. On-Chain Engine: stream_burn_engine]
+        Keeper[Automated Keeper / Cron Crank] -->|Invoke: execute_burn| BurnIx[Instruction: execute_burn]
+        
+        BurnIx --> AuthCheck{PDA & Signer Validation\nSeeds matches PDA?}
+        AuthCheck -- Invalid --> ErrorRevert[Revert: InvalidAuthority]
+        AuthCheck -- Valid --> SplCpi[CPI: spl_token::burn_checked]
+        
+        SplCpi --> TokenMint[SPL Token Mint Account\nSupply Decremented]
+        SplCpi --> VaultPDA
+        
+        SplCpi --> EmitEvent[Emit StreamBurnedEvent\nAmount, Mint, Epoch, Timestamp]
+    end
+
+    subgraph OffChain_Monitoring [3. Indexer & Social Automation Daemon]
+        EmitEvent -->|Solana WS: logsSubscribe| WSListener[TypeScript Keeper Daemon]
+        WSListener --> TxValidator{Fetch & Verify Tx\nCommitment: Finalized}
+        TxValidator -- Failed/Unconfirmed --> DropTx[Drop / Alert Sentry]
+        TxValidator -- Verified --> PayloadGen[Format Proof Payload &\nRender Social Infographic]
+    end
+
+    subgraph Social_Distribution [4. Verifiable Social Broadcast]
+        PayloadGen --> TwitterAPI[Twitter API v2 / X Client]
+        TwitterAPI --> TweetPost[Published Post / Thread\nWith Solscan Tx Proof]
+        TweetPost --> Community[Solana Community & Market]
+    end
+
+    style VaultPDA fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#fff
+    style SplCpi fill:#0f172a,stroke:#22c55e,stroke-width:2px,color:#fff
+    style TweetPost fill:#030712,stroke:#f59e0b,stroke-width:2px,color:#fff

@@ -1,0 +1,22 @@
+# Solana Cluster Endpoints
+SOLANA_RPC_HTTP=https://rpc.helius.xyz/?api-key=YOUR_API_KEY
+SOLANA_RPC_WSS=wss://rpc.helius.xyz/?api-key=YOUR_API_KEY
+STREAM_MINT_ADDRESS=STREAMribs2kUhy5Fvptng5J8U993Dk4Fv9uT8GkZg
+STREAM_TOKEN_DECIMALS=9
+TOTAL_ORIGINAL_SUPPLY=1000000000
+
+# Twitter / X Developer API Credentials
+TWITTER_API_KEY=xXxxXxXxxxXXXXxx
+TWITTER_API_SECRET=xXxxXxXxxxXXXXxx
+TWITTER_ACCESS_TOKEN=000000000-xXxxXxXxxxXXXXxx
+TWITTER_ACCESS_SECRET=xXxxXxXxxxXXXXxx
+
+# Enterprise Webhooks
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+
+# Execution Parameters
+PORT=8080
+LOG_LEVEL=info
+DRY_RUN=false
+REDIS_URL=redis://127.0.0.1:6379

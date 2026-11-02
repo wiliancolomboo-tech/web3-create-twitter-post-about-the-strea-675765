@@ -1,0 +1,38 @@
+import Database from "better-sqlite3";
+import type { BurnProof } from "./solana.js";
+
+export class Store {
+  private db: Database.Database;
+
+  constructor(path = process.env.DB_PATH ?? "./data/publisher.db") {
+    this.db = new Database(path);
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS posts (
+        signature TEXT PRIMARY KEY,
+        mint TEXT NOT NULL,
+        amount TEXT NOT NULL,
+        x_post_id TEXT NOT NULL,
+        created_at TEXT NOT NULL
+      )
+    `);
+  }
+
+  get(signature: string) {
+    return this.db
+      .prepare("SELECT * FROM posts WHERE signature = ?")
+      .get(signature) as { x_post_id: string } | undefined;
+  }
+
+  save(proof: BurnProof, postId: string) {
+    this.db.prepare(`
+      INSERT INTO posts(signature, mint, amount, x_post_id, created_at)
+      VALUES (?, ?, ?, ?, ?)
+    `).run(
+      proof.signature,
+      proof.mint,
+      proof.humanAmount,
+      postId,
+      new Date().toISOString()
+    );
+  }
+}

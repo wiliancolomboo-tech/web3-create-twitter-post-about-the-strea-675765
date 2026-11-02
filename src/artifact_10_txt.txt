@@ -1,0 +1,8 @@
+Why this matters for the $STREAM ecosystem:
+
+1️⃣ Supply Squeeze: This burn permanently removes ~0.50% of the active circulating float in a single block.
+2️⃣ Verifiable Execution: SPL Token program verified on Solana Mainnet with complete cryptographic state change confirmation.
+3️⃣ Real Protocol Value: Fueled by ongoing protocol revenue and fee-redistribution mechanics.
+
+Check the on-chain balance deltas live:
+solscan.io/token/STREAMribbcsz2y72wYq5e3Y9Q9n1H1w3XQk8M2j4kP

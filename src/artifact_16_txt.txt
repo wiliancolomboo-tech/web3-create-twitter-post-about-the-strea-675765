@@ -1,0 +1,9 @@
+Why does this burn matter for the @streamflow_fi ecosystem?
+
+📉 Circulating Supply: -2.5% reduction
+⚡ Protocol Revenue Sink: Programmatic burns funded directly by protocol treasury velocity
+🔐 Verifiable Proof: Recorded via our decentralized Anchor Burn Auditor PDA
+
+Every stream streamed makes $STREAM scarcer.
+
+(2/3) #DeFi #Tokenomics

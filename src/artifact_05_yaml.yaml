@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  stream-burn-watcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+      - SOLANA_WS_URL=wss://api.mainnet-beta.solana.com
+      - STREAM_MINT_ADDRESS=STREAM3333333333333333333333333333333333333
+      - TWITTER_API_KEY=${TWITTER_API_KEY}
+      - TWITTER_API_SECRET=${TWITTER_API_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('Worker Active')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

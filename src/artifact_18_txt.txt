@@ -1,0 +1,8 @@
+Every burn on @Streamflow_fi is trustless and cryptographically verifiable on @solana:
+
+📉 Amount Destroyed: 2,500,000 $STREAM
+📦 Remaining Supply: 97,500,000 $STREAM
+📊 % Supply Reduced: 2.5% of circulating float
+🔗 On-Chain Proof: https://solscan.io/tx/4FvN9B8Zk23Lp8Q...
+
+Real yield. Programmatic deflation. Transparent accounting.

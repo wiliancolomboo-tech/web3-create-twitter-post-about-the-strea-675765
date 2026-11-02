@@ -1,0 +1,101 @@
+import {
+  Connection,
+  ParsedInstruction,
+  PartiallyDecodedInstruction,
+  PublicKey
+} from "@solana/web3.js";
+
+export interface BurnProof {
+  signature: string;
+  mint: string;
+  authority: string;
+  rawAmount: bigint;
+  decimals: number;
+  humanAmount: string;
+  slot: number;
+  explorerUrl: string;
+}
+
+const TOKEN_PROGRAM = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
+const TOKEN_2022_PROGRAM = "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb";
+
+function decimalAmount(raw: bigint, decimals: number): string {
+  if (decimals === 0) return raw.toString();
+  const s = raw.toString().padStart(decimals + 1, "0");
+  const split = s.length - decimals;
+  return `${s.slice(0, split)}.${s.slice(split)}`.replace(/\.?0+$/, "");
+}
+
+export async function verifyStreamBurn(
+  connection: Connection,
+  signature: string,
+  expectedMint: string
+): Promise<BurnProof> {
+  if (!/^[1-9A-HJ-NP-Za-km-z]{32,88}$/.test(signature)) {
+    throw new Error("Invalid Solana transaction signature");
+  }
+
+  const mint = new PublicKey(expectedMint);
+  const tx = await connection.getParsedTransaction(signature, {
+    commitment: "confirmed",
+    maxSupportedTransactionVersion: 0
+  });
+
+  if (!tx) throw new Error("Transaction not found or not confirmed");
+  if (tx.meta?.err) throw new Error("Transaction failed on-chain");
+
+  const instructions = [
+    ...tx.transaction.message.instructions,
+    ...(tx.meta.innerInstructions ?? []).flatMap(x => x.instructions)
+  ];
+
+  for (const instruction of instructions) {
+    if (!("parsed" in instruction)) continue;
+
+    const parsed = instruction as ParsedInstruction;
+    const programId = parsed.programId.toBase58();
+
+    if (programId !== TOKEN_PROGRAM && programId !== TOKEN_2022_PROGRAM) {
+      continue;
+    }
+
+    const type = parsed.parsed?.type;
+    if (type !== "burn" && type !== "burnChecked") continue;
+
+    const info = parsed.parsed.info as {
+      mint?: string;
+      authority?: string;
+      amount?: string;
+      tokenAmount?: { amount: string; decimals: number };
+    };
+
+    if (info.mint !== mint.toBase58()) continue;
+
+    const raw = BigInt(
+      info.tokenAmount?.amount ?? info.amount ?? ""
+    );
+
+    const decimals = info.tokenAmount?.decimals ??
+      (await connection.getParsedAccountInfo(mint)).value &&
+      (((await connection.getParsedAccountInfo(mint)).value as any)?.data?.parsed?.info?.decimals);
+
+    if (!Number.isInteger(decimals) || decimals < 0 || decimals > 18) {
+      throw new Error("Unable to determine valid token decimals");
+    }
+
+    const authority = info.authority ?? "unknown";
+
+    return {
+      signature,
+      mint: mint.toBase58(),
+      authority,
+      rawAmount: raw,
+      decimals,
+      humanAmount: decimalAmount(raw, decimals),
+      slot: tx.slot,
+      explorerUrl: `https://explorer.solana.com/tx/${signature}`
+    };
+  }
+
+  throw new Error("Transaction does not contain a STREAM burn instruction");
+}

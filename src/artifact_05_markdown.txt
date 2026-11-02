@@ -1,0 +1,59 @@
+--- START OF READY-TO-PUBLISH TWITTER THREAD ---
+
+Tweet 1 (Root Tweet):
+🚨 RECORD $STREAM TOKEN BURN CONFIRMED 🚨
+
+A massive protocol burn has just been permanently executed directly on @solana via the Stream Burn CPI Engine!
+
+🔥 Burned This Event: 2,500,000 $STREAM ($~185,000 USD)
+📉 Cumulative Total Burned: 14,250,000 $STREAM
+⏱️ Epoch: 582 | Slot: 248911029
+🏛️ SPL Mint: StrMBurnEngine11111111111111111111111111111
+
+All burned tokens have been irreversibly purged from circulating supply. 
+
+Proof on @solscan:
+https://solscan.io/tx/4Z3rLgP9k9X1... [Verify On-Chain]
+
+🧵 Technical details & tokenomic impact below 👇
+
+---
+
+Tweet 2 (Technical Mechanics):
+1/ How does the $STREAM Burn Engine work?
+
+Unlike traditional "burns" that send tokens to an unspendable dead address:
+• $STREAM utilizes an Anchor-native Program Derived Address (PDA)
+• Issues a direct Cross-Program Invocation (CPI) to the SPL Token Program
+• Invokes `token::burn`, modifying the native SPL Mint ledger and decreasing Total Supply permanently.
+
+Zero reliance on off-chain trust. 100% verified state transition.
+
+---
+
+Tweet 3 (Tokenomics & Real Yield Loop):
+2/ Where did the tokens come from?
+
+The burn is driven entirely by organic protocol utilization:
+➡️ Vesting contract creation fees
+➡️ Automated payroll streaming volume
+➡️ Protocol buyback modules funded by treasury yields
+
+More velocity on Streamflow = faster supply compression. Real Yield translating into continuous deflationary pressure.
+
+---
+
+Tweet 4 (Call to Action & Future Roadmap):
+3/ The deflationary flywheel is in motion. 
+
+📈 Supply is contracting
+⚡ Transaction throughput is scaling
+🔐 Institutional locks & streams continue to reach ATHs
+
+Track ongoing burns in real-time or build on top of our open-source keeper architecture:
+github.com/streamflow-finance/stream-burn-engine
+
+Are you streaming your capital on Solana yet? 🌊💧
+$STREAM #Solana #DeFi #CryptoTwitter #SolanaSummer
+
+--- END OF READY-TO-PUBLISH TWITTER THREAD ---

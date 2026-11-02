@@ -1,0 +1,9 @@
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+   SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_KEY
+   STREAM_MINT_ADDRESS=STREAMyocT9PnGub28h8s13pyh74f4j3H4u8S3Yc4a
+   REDIS_URL=redis://redis:6379
+   TWITTER_APP_KEY=your_x_consumer_key
+   TWITTER_APP_SECRET=your_x_consumer_secret
+   TWITTER_ACCESS_TOKEN=your_x_access_token
+   TWITTER_ACCESS_SECRET=your_x_access_secret
+   DRY_RUN=false

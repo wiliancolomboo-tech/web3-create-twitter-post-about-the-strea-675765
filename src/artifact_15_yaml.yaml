@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  stream-burn-oracle:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stream-burn-oracle
+    restart: always
+    environment:
+      - SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY
+      - SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_API_KEY
+      - STREAM_MINT_ADDRESS=STREAMribRwybzpXoohqHwS5q65qCq96KqD1E5E7Y9B4
+      - STREAM_DECIMALS=9
+      - TWITTER_API_KEY=${TWITTER_API_KEY}
+      - TWITTER_API_SECRET=${TWITTER_API_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

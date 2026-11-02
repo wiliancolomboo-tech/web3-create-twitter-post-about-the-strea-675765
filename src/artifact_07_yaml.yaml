@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  stream-burn-sentinel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stream_burn_sentinel
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL}
+      - SOLANA_WS_URL=${SOLANA_WS_URL}
+      - STREAM_MINT_ADDRESS=${STREAM_MINT_ADDRESS}
+      - TWITTER_APP_KEY=${TWITTER_APP_KEY}
+      - TWITTER_APP_SECRET=${TWITTER_APP_SECRET}
+      - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
+      - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      - DB_PATH=/app/data/sentinel.sqlite
+    volumes:
+      - sentinel-data:/app/data
+    healthcheck:
+      test: ["CMD-SHELL", "node -e 'process.exit(0)'"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  sentinel-data:
+    driver: local

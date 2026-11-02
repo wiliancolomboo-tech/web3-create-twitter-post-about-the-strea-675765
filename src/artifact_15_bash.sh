@@ -1,0 +1,1 @@
+docker logs -f streamproof_sentinel

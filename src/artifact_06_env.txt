@@ -1,0 +1,15 @@
+# Solana Network Configuration
+SOLANA_RPC_HTTP_URL=https://api.mainnet-beta.solana.com
+SOLANA_RPC_WS_URL=wss://api.mainnet-beta.solana.com
+STREAM_MINT=StrM111111111111111111111111111111111111111
+PROGRAM_ID=StrMBurn11111111111111111111111111111111111
+STREAM_DECIMALS=9
+
+# Twitter / X API v2 Credentials (App & User OAuth 1.0a)
+TWITTER_API_KEY=your_consumer_key
+TWITTER_API_SECRET=your_consumer_secret
+TWITTER_ACCESS_TOKEN=your_oauth_token
+TWITTER_ACCESS_SECRET=your_oauth_token_secret
+
+# Enterprise Ops Alerting (Discord / Slack)
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder

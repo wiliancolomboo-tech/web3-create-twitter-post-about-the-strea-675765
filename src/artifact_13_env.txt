@@ -1,0 +1,19 @@
+# Solana Network Configuration
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+SOLANA_WS_URL=wss://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_KEY
+STREAM_MINT_ADDRESS=Str3amK9gN9kQz1vQv6jV9Uu2oGkPqA5YyW7X6Z4bC1
+STREAM_DECIMALS=6
+
+# X / Twitter Developer API v2 Credentials
+TWITTER_APP_KEY=your_consumer_key
+TWITTER_APP_SECRET=your_consumer_secret
+TWITTER_ACCESS_TOKEN=your_oauth_access_token
+TWITTER_ACCESS_SECRET=your_oauth_access_token_secret
+
+# Optional Webhooks
+DISCORD_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+SLACK_WEBHOOK_URL=https://api.example.com/webhooks/alerts/placeholder
+
+# Internal Storage & Telemetry
+REDIS_URL=redis://127.0.0.1:6379
+PORT=8080

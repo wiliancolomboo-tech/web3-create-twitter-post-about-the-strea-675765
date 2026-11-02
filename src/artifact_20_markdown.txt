@@ -1,0 +1,10 @@
+⚡️ The Power of Programmatic Deflation (2/3)
+
+As @Streamflow_FI scales as the institutional backbone for token distribution, vesting, and streaming on Solana, value accrual must remain mathematically sound.
+
+Here is what this burn achieves:
+✅ Permanent reduction of total token supply
+✅ Increased token scarcity per unit of protocol TVL
+✅ Transparent execution via non-custodial SPL `BurnChecked` instruction
+
+No secondary buybacks hidden in private vaults. Just provable on-chain destruction. (2/3)

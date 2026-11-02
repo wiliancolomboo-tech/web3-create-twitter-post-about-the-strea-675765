@@ -1,0 +1,7 @@
+stream_burn_telemetry test suite
+    ✔ Initializes the global burn ledger successfully (412ms)
+    ✔ Executes deterministic burn and updates on-chain state & supply (589ms)
+    ✔ Rejects zero burn amount via invariant checks (118ms)
+    ✔ Fails unauthorized burner execution gracefully (142ms)
+
+  4 passing (1.3s)
